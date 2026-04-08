@@ -303,6 +303,232 @@ function explode(card) {
     document.head.appendChild(style);
 })();
 
+// ===== TAMAGOTCHI =====
+const tama = {
+    hunger: 80,
+    happy: 70,
+    energy: 90,
+    age: 0,
+    isSleeping: false,
+    name: 'Michi'
+};
+
+let tamaInterval;
+let tamaAgeInterval;
+
+// Decay stats over time
+tamaInterval = setInterval(() => {
+    if (tama.isSleeping) {
+        tama.energy = Math.min(100, tama.energy + 2);
+        tama.hunger = Math.max(0, tama.hunger - 0.5);
+    } else {
+        tama.hunger = Math.max(0, tama.hunger - 1);
+        tama.happy = Math.max(0, tama.happy - 0.5);
+        tama.energy = Math.max(0, tama.energy - 0.4);
+    }
+    updateTamaBars();
+    updateTamaMood();
+    updateTamaFace();
+}, 3000);
+
+// Age counter
+tamaAgeInterval = setInterval(() => {
+    tama.age++;
+    const el = document.getElementById('tamaAge');
+    if (el) el.textContent = tama.age + ' min';
+}, 60000);
+
+function updateTamaBars() {
+    const h = document.getElementById('barHunger');
+    const hp = document.getElementById('barHappy');
+    const e = document.getElementById('barEnergy');
+    if (h) h.style.width = tama.hunger + '%';
+    if (hp) hp.style.width = tama.happy + '%';
+    if (e) e.style.width = tama.energy + '%';
+}
+
+function updateTamaMood() {
+    const el = document.getElementById('tamaMood');
+    if (!el) return;
+    const avg = (tama.hunger + tama.happy + tama.energy) / 3;
+
+    if (tama.isSleeping) {
+        el.textContent = tama.name + ' esta durmiendo... zzz';
+    } else if (avg > 80) {
+        el.textContent = tama.name + ' esta en la gloria!';
+    } else if (avg > 60) {
+        el.textContent = tama.name + ' esta contento';
+    } else if (avg > 40) {
+        el.textContent = tama.name + ' esta regular... necesita mimos';
+    } else if (avg > 20) {
+        el.textContent = tama.name + ' esta triste... cuidalo!';
+    } else {
+        el.textContent = tama.name + ' esta DRAMATIZANDO al maximo!';
+    }
+}
+
+function updateTamaFace() {
+    const cat = document.getElementById('tamaCat');
+    if (!cat) return;
+    const avg = (tama.hunger + tama.happy + tama.energy) / 3;
+
+    cat.classList.remove('happy-eyes', 'sleep-eyes');
+
+    if (tama.isSleeping) {
+        cat.classList.add('sleep-eyes');
+    } else if (avg > 60) {
+        cat.classList.add('happy-eyes');
+    }
+}
+
+function tamaTriggerAnim(cls, duration) {
+    const cat = document.getElementById('tamaCat');
+    if (!cat) return;
+    cat.classList.remove('eating', 'petted', 'playing', 'sleeping');
+    cat.offsetHeight;
+    cat.classList.add(cls);
+    setTimeout(() => cat.classList.remove(cls), duration);
+}
+
+function tamaShowThought(emoji) {
+    const el = document.getElementById('tamaThought');
+    if (!el) return;
+    el.textContent = emoji;
+    el.classList.add('visible');
+    setTimeout(() => el.classList.remove('visible'), 1500);
+}
+
+function tamaWake() {
+    tama.isSleeping = false;
+    const cat = document.getElementById('tamaCat');
+    const zzz = document.getElementById('tamaZzz');
+    if (cat) {
+        cat.classList.remove('sleeping', 'sleep-eyes');
+        cat.style.animation = '';
+        cat.offsetHeight;
+        cat.style.animation = 'tamaIdle 3s infinite ease-in-out';
+    }
+    if (zzz) zzz.classList.remove('visible');
+}
+
+function tamaFeed() {
+    if (tama.isSleeping) tamaWake();
+    tama.hunger = Math.min(100, tama.hunger + 20);
+    tama.energy = Math.min(100, tama.energy + 5);
+    updateTamaBars();
+    tamaTriggerAnim('eating', 1200);
+
+    const foods = ['🐟', '🍣', '🥛', '🍗', '🐠'];
+    tamaShowThought(foods[Math.floor(Math.random() * foods.length)]);
+    updateTamaMood();
+}
+
+function tamaPet() {
+    if (tama.isSleeping) tamaWake();
+    tama.happy = Math.min(100, tama.happy + 15);
+    updateTamaBars();
+    tamaTriggerAnim('petted', 1250);
+    tamaShowThought('💕');
+
+    // Spawn hearts
+    const particles = document.getElementById('tamaParticles');
+    if (particles) {
+        for (let i = 0; i < 5; i++) {
+            const heart = document.createElement('span');
+            heart.textContent = '💗';
+            heart.style.cssText = `
+                position: absolute;
+                font-size: 1.2rem;
+                left: ${40 + Math.random() * 40}%;
+                bottom: 50%;
+                animation: heartFloat 1.5s ease-out forwards;
+                animation-delay: ${i * 0.15}s;
+                opacity: 0;
+            `;
+            particles.appendChild(heart);
+            setTimeout(() => heart.remove(), 2000);
+        }
+    }
+
+    if (!document.getElementById('heartFloatStyle')) {
+        const style = document.createElement('style');
+        style.id = 'heartFloatStyle';
+        style.textContent = `
+            @keyframes heartFloat {
+                0% { transform: translateY(0) scale(0); opacity: 0; }
+                30% { opacity: 1; transform: translateY(-20px) scale(1); }
+                100% { transform: translateY(-80px) scale(0.5); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    updateTamaMood();
+}
+
+function tamaPlay() {
+    if (tama.isSleeping) tamaWake();
+    if (tama.energy < 10) {
+        tamaShowThought('😩');
+        document.getElementById('tamaMood').textContent = tama.name + ' esta demasiado cansado para jugar!';
+        return;
+    }
+    tama.happy = Math.min(100, tama.happy + 25);
+    tama.energy = Math.max(0, tama.energy - 15);
+    tama.hunger = Math.max(0, tama.hunger - 10);
+    updateTamaBars();
+    tamaTriggerAnim('playing', 1500);
+
+    const toys = ['🧶', '🧸', '🎾', '🪶', '🐭'];
+    tamaShowThought(toys[Math.floor(Math.random() * toys.length)]);
+    updateTamaMood();
+}
+
+function tamaSleep() {
+    if (tama.isSleeping) {
+        tamaWake();
+        tamaShowThought('😳');
+        document.getElementById('tamaMood').textContent = tama.name + ' se ha despertado sobresaltado!';
+        return;
+    }
+    tama.isSleeping = true;
+    const cat = document.getElementById('tamaCat');
+    const zzz = document.getElementById('tamaZzz');
+
+    if (cat) {
+        cat.classList.add('sleeping', 'sleep-eyes');
+        cat.style.animation = 'none';
+        cat.offsetHeight;
+        cat.style.animation = 'tamaSleep 2s infinite ease-in-out';
+    }
+    if (zzz) {
+        zzz.textContent = '💤';
+        zzz.classList.add('visible');
+    }
+    tamaShowThought('😴');
+    updateTamaMood();
+}
+
+function tamaTreat() {
+    if (tama.isSleeping) tamaWake();
+    tama.happy = Math.min(100, tama.happy + 10);
+    tama.hunger = Math.min(100, tama.hunger + 10);
+    updateTamaBars();
+    tamaTriggerAnim('eating', 1000);
+
+    const treats = ['🍪', '🍩', '🧁', '🍰', '🍦'];
+    tamaShowThought(treats[Math.floor(Math.random() * treats.length)]);
+
+    // Random chance of zoomies after sugar
+    if (Math.random() > 0.6) {
+        setTimeout(() => {
+            tamaTriggerAnim('playing', 1500);
+            document.getElementById('tamaMood').textContent =
+                tama.name + ' tiene un SUBIDÓN de azucar!! ZOOMIES!!';
+        }, 1200);
+    }
+    updateTamaMood();
+}
+
 // ===== EXCUSE GENERATOR =====
 const excuseStarts = [
     'Es que mi gato',

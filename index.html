@@ -226,6 +226,68 @@
     </div>
 </section>
 
+<!-- TAMAGOTCHI -->
+<section class="section tama-section" id="tamagotchi">
+    <h2>Tu Gatito Virtual</h2>
+    <p class="section-desc">Cuidalo o se pondra dramatico (mas de lo normal)</p>
+
+    <div class="tama-container">
+        <div class="tama-screen">
+            <div class="tama-status-bar">
+                <span class="tama-name" id="tamaName">Michi</span>
+                <span class="tama-age" id="tamaAge">0 min</span>
+            </div>
+
+            <div class="tama-scene">
+                <div class="tama-cat" id="tamaCat">
+                    <div class="tama-ear-l"></div>
+                    <div class="tama-ear-r"></div>
+                    <div class="tama-head">
+                        <div class="tama-eye-l" id="tamaEyeL"></div>
+                        <div class="tama-eye-r" id="tamaEyeR"></div>
+                        <div class="tama-nose"></div>
+                        <div class="tama-mouth" id="tamaMouth"></div>
+                        <div class="tama-whisker-l"></div>
+                        <div class="tama-whisker-r"></div>
+                    </div>
+                    <div class="tama-body">
+                        <div class="tama-paw-l"></div>
+                        <div class="tama-paw-r"></div>
+                    </div>
+                    <div class="tama-tail"></div>
+                </div>
+                <div class="tama-thought" id="tamaThought"></div>
+                <div class="tama-zzz" id="tamaZzz"></div>
+                <div class="tama-particles" id="tamaParticles"></div>
+            </div>
+
+            <div class="tama-bars">
+                <div class="tama-bar-row">
+                    <span class="tama-bar-label">Hambre</span>
+                    <div class="tama-bar"><div class="tama-bar-fill hunger" id="barHunger" style="width:80%"></div></div>
+                </div>
+                <div class="tama-bar-row">
+                    <span class="tama-bar-label">Felicidad</span>
+                    <div class="tama-bar"><div class="tama-bar-fill happy" id="barHappy" style="width:70%"></div></div>
+                </div>
+                <div class="tama-bar-row">
+                    <span class="tama-bar-label">Energia</span>
+                    <div class="tama-bar"><div class="tama-bar-fill energy" id="barEnergy" style="width:90%"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tama-buttons">
+            <button class="tama-btn" onclick="tamaFeed()" title="Dar de comer">&#127835;</button>
+            <button class="tama-btn" onclick="tamaPet()" title="Acariciar">&#128400;</button>
+            <button class="tama-btn" onclick="tamaPlay()" title="Jugar">&#127934;</button>
+            <button class="tama-btn" onclick="tamaSleep()" title="Dormir">&#128164;</button>
+            <button class="tama-btn" onclick="tamaTreat()" title="Golosina">&#127849;</button>
+        </div>
+        <p class="tama-mood" id="tamaMood">Michi esta contento</p>
+    </div>
+</section>
+
 <!-- RANDOM GENERATOR -->
 <section class="section random-section" id="random">
     <h2>Generador de Excusas Inutiles</h2>
