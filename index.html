@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chorradas para Maria</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Yarn balls floating -->
+<div class="yarn-container" id="yarnContainer"></div>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-content">
+        <h1 class="glitch" data-text="CHORRADAS">CHORRADAS</h1>
+        <p class="subtitle">Una web hecha con mass amor que mass sentido</p>
+        <div class="cat-ascii">
+<pre>
+  /\_/\
+ ( o.o )
+  > ^ <
+ /|   |\
+(_|   |_)
+</pre>
+        </div>
+        <button class="cta-btn" onclick="meow()">Pulsa si te gustan los gatos</button>
+        <div id="meowResult" class="meow-result"></div>
+    </div>
+    <div class="scroll-indicator">
+        <span>Scroll si te atreves</span>
+        <div class="arrow-down"></div>
+    </div>
+</header>
+
+<!-- GATITOS -->
+<section class="section cats-section" id="gatitos">
+    <h2>Gatitos que curan el alma</h2>
+    <div class="cats-grid">
+        <div class="cat-card" style="--delay: 0s">
+            <img src="https://placecats.com/millie/400/300" alt="Gatito adorable">
+            <p>Este gatito cree en ti mas que tu jefe</p>
+        </div>
+        <div class="cat-card" style="--delay: 0.2s">
+            <img src="https://placecats.com/neo/400/300" alt="Gatito pensativo">
+            <p>Pensando en por que los lunes existen</p>
+        </div>
+        <div class="cat-card" style="--delay: 0.4s">
+            <img src="https://placecats.com/bella/400/300" alt="Gatito feliz">
+            <p>Cuando llegas a casa y el gato no ha roto nada</p>
+        </div>
+        <div class="cat-card" style="--delay: 0.6s">
+            <img src="https://placecats.com/millie/401/300" alt="Gatito dormido">
+            <p>Mi productividad un viernes a las 14:00</p>
+        </div>
+        <div class="cat-card" style="--delay: 0.8s">
+            <img src="https://placecats.com/neo/401/300" alt="Gatito sorprendido">
+            <p>Cuando ves el precio de la luz</p>
+        </div>
+        <div class="cat-card" style="--delay: 1s">
+            <img src="https://placecats.com/bella/401/300" alt="Gatito enfadado">
+            <p>Yo cuando alguien dice "es facil"</p>
+        </div>
+    </div>
+</section>
+
+<!-- OVILLOS DE LANA -->
+<section class="section yarn-section" id="ovillos">
+    <h2>Rincon de los Ovillos</h2>
+    <p class="section-desc">Haz clic en los ovillos para desenredarlos (o enredarlos mas, quien sabe)</p>
+    <div class="yarn-playground" id="yarnPlayground">
+        <div class="yarn-ball" style="--color1: #ff6b9d; --color2: #c44569" onclick="bounceYarn(this)">
+            <div class="yarn-stripe"></div>
+            <div class="yarn-stripe s2"></div>
+            <div class="yarn-stripe s3"></div>
+        </div>
+        <div class="yarn-ball" style="--color1: #7ed6df; --color2: #22a6b3" onclick="bounceYarn(this)">
+            <div class="yarn-stripe"></div>
+            <div class="yarn-stripe s2"></div>
+            <div class="yarn-stripe s3"></div>
+        </div>
+        <div class="yarn-ball" style="--color1: #f9ca24; --color2: #f0932b" onclick="bounceYarn(this)">
+            <div class="yarn-stripe"></div>
+            <div class="yarn-stripe s2"></div>
+            <div class="yarn-stripe s3"></div>
+        </div>
+        <div class="yarn-ball" style="--color1: #a29bfe; --color2: #6c5ce7" onclick="bounceYarn(this)">
+            <div class="yarn-stripe"></div>
+            <div class="yarn-stripe s2"></div>
+            <div class="yarn-stripe s3"></div>
+        </div>
+        <div class="yarn-ball" style="--color1: #55efc4; --color2: #00b894" onclick="bounceYarn(this)">
+            <div class="yarn-stripe"></div>
+            <div class="yarn-stripe s2"></div>
+            <div class="yarn-stripe s3"></div>
+        </div>
+    </div>
+    <div id="yarnCounter" class="yarn-counter">Ovillos tocados: 0</div>
+</section>
+
+<!-- ANIMAL CROSSING -->
+<section class="section ac-section" id="animalcrossing">
+    <h2>Animal Crossing Zone</h2>
+    <div class="ac-island">
+        <div class="ac-sky">
+            <div class="ac-cloud c1"></div>
+            <div class="ac-cloud c2"></div>
+            <div class="ac-cloud c3"></div>
+        </div>
+        <div class="ac-ground">
+            <div class="ac-tree t1">
+                <div class="tree-top"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="ac-tree t2">
+                <div class="tree-top"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="ac-tree t3">
+                <div class="tree-top"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="ac-villager" id="villager" onclick="villagerSpeak()">
+                <div class="v-head">
+                    <div class="v-eye left"></div>
+                    <div class="v-eye right"></div>
+                    <div class="v-mouth"></div>
+                    <div class="v-ear left"></div>
+                    <div class="v-ear right"></div>
+                </div>
+                <div class="v-body"></div>
+            </div>
+            <div class="ac-speech" id="speechBubble">
+                <span id="speechText">Haz clic en mi!</span>
+            </div>
+            <div class="ac-flowers">
+                <span class="flower f1">&#127804;</span>
+                <span class="flower f2">&#127799;</span>
+                <span class="flower f3">&#127800;</span>
+                <span class="flower f4">&#127801;</span>
+                <span class="flower f5">&#127802;</span>
+                <span class="flower f6">&#127803;</span>
+                <span class="flower f7">&#127804;</span>
+                <span class="flower f8">&#127799;</span>
+            </div>
+        </div>
+        <div class="ac-water">
+            <div class="wave w1"></div>
+            <div class="wave w2"></div>
+            <div class="wave w3"></div>
+        </div>
+    </div>
+    <div class="ac-quotes">
+        <h3>Sabiduria de Tom Nook</h3>
+        <div class="quote-card" id="nookQuote">
+            <p>"Si, si. Tu hipoteca son solo 2.498.000 bayas. Pero no hay prisa, no no."</p>
+        </div>
+        <button class="cta-btn ac-btn" onclick="nextNookQuote()">Otra perla de sabiduria</button>
+    </div>
+</section>
+
+<!-- MEMES EXPLOSION -->
+<section class="section memes-section" id="memes">
+    <h2>Galeria de la Explosion por Inutilidad</h2>
+    <p class="section-desc">Situaciones que nos hacen explotar internamente</p>
+    <div class="memes-grid">
+        <div class="meme-card" onclick="explode(this)">
+            <div class="meme-icon">&#128565;</div>
+            <h3>Cuando mandas el mensaje al grupo equivocado</h3>
+            <p class="meme-subtitle">Y era un audio de 4 minutos rajando</p>
+            <div class="explosion-overlay">&#128163; BOOM &#128163;</div>
+        </div>
+        <div class="meme-card" onclick="explode(this)">
+            <div class="meme-icon">&#129327;</div>
+            <h3>Git push --force en main</h3>
+            <p class="meme-subtitle">Un viernes a las 17:59</p>
+            <div class="explosion-overlay">&#128163; BOOM &#128163;</div>
+        </div>
+        <div class="meme-card" onclick="explode(this)">
+            <div class="meme-icon">&#128561;</div>
+            <h3>"Responder a todos" con el meme del jefe</h3>
+            <p class="meme-subtitle">Incluyendo al jefe en CC</p>
+            <div class="explosion-overlay">&#128163; BOOM &#128163;</div>
+        </div>
+        <div class="meme-card" onclick="explode(this)">
+            <div class="meme-icon">&#129397;</div>
+            <h3>DROP TABLE en produccion</h3>
+            <p class="meme-subtitle">"Era la base de datos de pruebas... no?"</p>
+            <div class="explosion-overlay">&#128163; BOOM &#128163;</div>
+        </div>
+        <div class="meme-card" onclick="explode(this)">
+            <div class="meme-icon">&#128556;</div>
+            <h3>Cerrar 47 pestanas sin guardar</h3>
+            <p class="meme-subtitle">Incluida la que llevabas buscando 2 horas</p>
+            <div class="explosion-overlay">&#128163; BOOM &#128163;</div>
+        </div>
+        <div class="meme-card" onclick="explode(this)">
+            <div class="meme-icon">&#128562;</div>
+            <h3>"Eso lo tengo yo controlado"</h3>
+            <p class="meme-subtitle">Narrador: no lo tenia controlado</p>
+            <div class="explosion-overlay">&#128163; BOOM &#128163;</div>
+        </div>
+        <div class="meme-card" onclick="explode(this)">
+            <div class="meme-icon">&#129318;</div>
+            <h3>Decir "si" en la reunion sin escuchar</h3>
+            <p class="meme-subtitle">Y era para ser voluntario del proyecto</p>
+            <div class="explosion-overlay">&#128163; BOOM &#128163;</div>
+        </div>
+        <div class="meme-card" onclick="explode(this)">
+            <div class="meme-icon">&#128553;</div>
+            <h3>Calentar pescado en el micro de la oficina</h3>
+            <p class="meme-subtitle">Y que se entere TODO el edificio</p>
+            <div class="explosion-overlay">&#128163; BOOM &#128163;</div>
+        </div>
+        <div class="meme-card" onclick="explode(this)">
+            <div class="meme-icon">&#128552;</div>
+            <h3>Compartir pantalla con WhatsApp Web abierto</h3>
+            <p class="meme-subtitle">Justo cuando tu madre manda ESE mensaje</p>
+            <div class="explosion-overlay">&#128163; BOOM &#128163;</div>
+        </div>
+    </div>
+    <div class="explosion-counter">
+        <p>Explosiones totales: <span id="explosionCount">0</span></p>
+        <p id="explosionComment">Todavia no ha explotado nadie...</p>
+    </div>
+</section>
+
+<!-- RANDOM GENERATOR -->
+<section class="section random-section" id="random">
+    <h2>Generador de Excusas Inutiles</h2>
+    <p class="section-desc">Para cuando la has liado y necesitas improvisar</p>
+    <div class="excuse-display" id="excuseDisplay">
+        <p id="excuseText">Pulsa el boton, cobarde</p>
+    </div>
+    <button class="cta-btn excuse-btn" onclick="generateExcuse()">
+        Generar excusa &#127922;
+    </button>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-cat">
+<pre>
+    /\_____/\
+   /  o   o  \
+  ( ==  ^  == )
+   )         (
+  (           )
+ ( (  )   (  ) )
+(__(__)___(__)__)
+</pre>
+    </div>
+    <p>Hecho con mass chorradas que sentido comun</p>
+    <p class="footer-small">Maria, espero que te haya sacado una sonrisa</p>
+    <p class="footer-small">Si no, al menos los gatitos son monos</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
